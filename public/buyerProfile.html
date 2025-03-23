@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Info - Aamsetu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- External CSS -->
+    <style>
+        /* Gradient Background */
+        .gradient-background {
+            background: linear-gradient(to right, #ffcc00, #9acd32, #008000);
+        }
+
+        /* Make the whole page use Flexbox */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Center Content Vertically */
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Centered Seller Info Tile */
+        .seller-info-container {
+            width: 400px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Profile Image */
+        .profile-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        /* Gradient Buttons */
+        .btn-gradient {
+            background: linear-gradient(to right, #ffcc00, #9acd32, #008000);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-gradient:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar (Gradient) -->
+    <nav class="navbar navbar-expand-lg gradient-background">
+        <div class="container-fluid">
+          <a class="navbar-brand text-white fw-bold" href="#">Aamsetu</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#">Edit Request</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="#">Post Request</a>
+              </li>
+            </ul>
+
+            <!-- Search Bar -->
+            <form class="d-flex me-3" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+
+            <!-- Account Dropdown -->
+            <div class="dropdown">
+              <button class="btn btn-light dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Account" width="30" height="30">
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                <li><a class="dropdown-item" href="#">Log Out</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </nav>
+
+    <!-- Main Container (Vertically Centered) -->
+    <div class="main-container">
+        <div class="seller-info-container">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Seller Profile" class="profile-icon">
+            <h3 class="mb-3">Buyer Information</h3>
+            <form>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="First Name" required>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Surname" required>
+                </div>
+                <div class="mb-3">
+                    <input type="tel" class="form-control" placeholder="Mobile Number" required>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Username" required>
+                </div>
+            </form>
+            
+            <!-- Gradient Buttons -->
+            <button class="btn-gradient mt-3">Edit Profile</button>
+            <button class="btn-gradient mt-2">Log Out</button>
+        </div>
+    </div>
+
+    <!--footer-->
+    <div class="container-fluid footer-pad gradient-background">
+        <footer class="justify-content-between align-items-center py-3 mt-4">
+          <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+              <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+            </a>
+            <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Aamsetu, Inc</span>
+          </div>
+      
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+          </ul>
+        </footer>
+      </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -43,13 +43,11 @@
 
         /* Gradient Buttons */
         .btn-gradient {
-            background: linear-gradient(360deg, #ff8000, #ffbf00, #ffff00);
+            background: linear-gradient(to right, #ff8000, #ffbf00, #ffff00);
             border: none;
-            color: white;
             padding: 10px;
             border-radius: 5px;
             width: 100%;
-            font-weight: bold;
             transition: 0.3s;
         }
 
@@ -57,48 +55,57 @@
             opacity: 0.8;
         }
     </style>
+
+<script src="../scripts/leafAnim.js"></script>
+<script>
+    // Initialize when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        MangoLeavesAnimation.init();
+    });
+</script>
 </head>
 <body>
 
-    <!-- Navigation Bar (Gradient) -->
-    <nav class="navbar navbar-expand-lg gradient-background">
-        <div class="container-fluid">
-          <a class="navbar-brand text-white fw-bold" href="#">Aamsetu</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">Edit Request</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white" href="#">Post Request</a>
-              </li>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary gradient-background">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Aamsetu</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " href="./buyerRequest.html">Post request</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./editRequest.html">Edit request</a>
+            </li>
+          </ul>
+
+          <!-- Search Bar -->
+          <form class="d-flex me-3" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+
+          <!-- Account Dropdown -->
+          <div class="dropdown">
+            <button class="btn btn-light dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Account" width="30" height="30">
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+              <li><a class="dropdown-item" href="./buyerProfile.html">Edit Profile</a></li>
+              <li><a class="dropdown-item" href="../logInSignUp.html">Log Out</a></li>
             </ul>
-
-            <!-- Search Bar -->
-            <form class="d-flex me-3" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-light" type="submit">Search</button>
-            </form>
-
-            <!-- Account Dropdown -->
-            <div class="dropdown">
-              <button class="btn btn-light dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Account" width="30" height="30">
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-                <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-                <li><a class="dropdown-item" href="#">Log Out</a></li>
-              </ul>
-            </div>
           </div>
+
         </div>
-    </nav>
+      </div>
+  </nav>
 
     <!-- Main Container (Vertically Centered) -->
     <div class="main-container">

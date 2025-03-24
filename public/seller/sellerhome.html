@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="../styles/navbar.css">
     <link rel="stylesheet" href="../styles/cards.css">
     
-    
-    <title>Buyer's Home</title>
-
+    <title>Seller's Home</title>
     <script src="../scripts/leafAnim.js"></script>
     <script>
         // Initialize when the page loads
@@ -19,12 +17,11 @@
         });
     </script>
 
-<style>
-  .list{
-    text-align: center;
-  }
-</style>
-
+    <style>
+      .h3{
+        text-align: center;
+      }
+    </style>
 </head>
 <body>
 
@@ -41,10 +38,10 @@
                 <a class="nav-link active" aria-current="page" href="#">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="./buyerRequest.html">Post request</a>
+                <a class="nav-link " href="./postProduct.html">Post Product</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./editRequest.html">Edit request</a>
+                <a class="nav-link" href="./editProduct.html">Edit Product</a>
               </li>
             </ul>
 
@@ -60,7 +57,7 @@
                 <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Account" width="30" height="30">
               </button>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-                <li><a class="dropdown-item" href="./buyerProfile.html">Edit Profile</a></li>
+                <li><a class="dropdown-item" href="./sellerProfile.html">Edit Profile</a></li>
                 <li><a class="dropdown-item" href="../logInSignUp.html">Log Out</a></li>
               </ul>
             </div>
@@ -69,7 +66,7 @@
         </div>
     </nav>
     
-    <h3 class="mb-3 pt-5 px-5 list">List of sellers</h3>
+    <h3 class="mb-3 pt-5 px-5">List of buyers</h3>
 
     <!-- List of Products -->
     <div class="container mt-4">
@@ -79,12 +76,12 @@
             <div class="col-md-6">
                 <div class="card p-3 shadow">
                     <div class="d-flex align-items-center">
-                        <img src="./placholder.png" alt="Seller Photo">
+                        <img src="../buyer/placholder.png" alt="Seller Photo">
                         <div class="ms-3">
                             <h5 class="mb-1">Rahul Sharma</h5>
                             <p class="mb-1 text-muted">Nagpur, Maharashtra</p>
-                            <p class="mb-2">Varieties: Alphonso, Kesar</p>
-                            <a href="./ProductDetails.html" class="btn gradient-background btn-sm">View More</a>
+                            <p class="mb-2"> Varieties required: Alphonso, Kesar</p>
+                            <a href="./requestDetails.html" class="btn gradient-background btn-sm">View More</a>
                         </div>
                     </div>
                 </div>
@@ -94,11 +91,11 @@
             <div class="col-md-6">
                 <div class="card p-3 shadow">
                     <div class="d-flex align-items-center">
-                        <img src="./placholder.png" alt="Seller Photo">
+                        <img src="../buyer/placholder.png" alt="Seller Photo">
                         <div class="ms-3">
                             <h5 class="mb-1">Pooja Patel</h5>
                             <p class="mb-1 text-muted">Lucknow, Uttar Pradesh</p>
-                            <p class="mb-2">Varieties: Dasheri, Langra</p>
+                            <p class="mb-2"> Varieties required: Dasheri, Langra</p>
                             <a href="#" class="btn gradient-background btn-sm">View More</a>
                         </div>
                     </div>
@@ -109,11 +106,11 @@
             <div class="col-md-6">
                 <div class="card p-3 shadow">
                     <div class="d-flex align-items-center">
-                        <img src="./placholder.png" alt="Seller Photo">
+                        <img src="../buyer/placholder.png" alt="Seller Photo">
                         <div class="ms-3">
                             <h5 class="mb-1">Amit Kumar</h5>
                             <p class="mb-1 text-muted">Ratnagiri, Maharashtra</p>
-                            <p class="mb-2">Varieties: Alphonso, Totapuri</p>
+                            <p class="mb-2"> Varieties required: Alphonso, Totapuri</p>
                             <a href="#" class="btn gradient-background btn-sm">View More</a>
                         </div>
                     </div>
@@ -124,11 +121,11 @@
             <div class="col-md-6">
                 <div class="card p-3 shadow">
                     <div class="d-flex align-items-center">
-                        <img src="./placholder.png" alt="Seller Photo">
+                        <img src="../buyer/placholder.png" alt="Seller Photo">
                         <div class="ms-3">
                             <h5 class="mb-1">Sita Verma</h5>
                             <p class="mb-1 text-muted">Salem, Tamil Nadu</p>
-                            <p class="mb-2">Varieties: Banganapalli, Neelum</p>
+                            <p class="mb-2"> Varieties required: Banganapalli, Neelum</p>
                             <a href="#" class="btn gradient-background btn-sm">View More</a>
                         </div>
                     </div>
@@ -139,11 +136,11 @@
             <div class="col-md-6">
               <div class="card p-3 shadow">
                   <div class="d-flex align-items-center">
-                      <img src="./placholder.png" alt="Seller Photo">
+                      <img src="../buyer/placholder.png" alt="Seller Photo">
                       <div class="ms-3">
                           <h5 class="mb-1">Sita Verma</h5>
                           <p class="mb-1 text-muted">Salem, Tamil Nadu</p>
-                          <p class="mb-2">Varieties: Banganapalli, Neelum</p>
+                          <p class="mb-2"> Varieties required: Banganapalli, Neelum</p>
                           <a href="#" class="btn gradient-background btn-sm">View More</a>
                       </div>
                   </div>
@@ -154,11 +151,11 @@
             <div class="col-md-6">
               <div class="card p-3 shadow">
                   <div class="d-flex align-items-center">
-                      <img src="./placholder.png" alt="Seller Photo">
+                      <img src="../buyer/placholder.png" alt="Seller Photo">
                       <div class="ms-3">
                           <h5 class="mb-1">Sita Verma</h5>
                           <p class="mb-1 text-muted">Salem, Tamil Nadu</p>
-                          <p class="mb-2">Varieties: Banganapalli, Neelum</p>
+                          <p class="mb-2"> Varieties required: Banganapalli, Neelum</p>
                           <a href="#" class="btn gradient-background btn-sm">View More</a>
                       </div>
                   </div>
@@ -169,11 +166,11 @@
             <div class="col-md-6">
               <div class="card p-3 shadow">
                   <div class="d-flex align-items-center">
-                      <img src="./placholder.png" alt="Seller Photo">
+                      <img src="../buyer/placholder.png" alt="Seller Photo">
                       <div class="ms-3">
                           <h5 class="mb-1">Sita Verma</h5>
                           <p class="mb-1 text-muted">Salem, Tamil Nadu</p>
-                          <p class="mb-2">Varieties: Banganapalli, Neelum</p>
+                          <p class="mb-2"> Varieties required: Banganapalli, Neelum</p>
                           <a href="#" class="btn gradient-background btn-sm">View More</a>
                       </div>
                   </div>
@@ -184,11 +181,11 @@
             <div class="col-md-6">
               <div class="card p-3 shadow">
                   <div class="d-flex align-items-center">
-                      <img src="./placholder.png" alt="Seller Photo">
+                      <img src="../buyer/placholder.png" alt="Seller Photo">
                       <div class="ms-3">
                           <h5 class="mb-1">Sita Verma</h5>
                           <p class="mb-1 text-muted">Salem, Tamil Nadu</p>
-                          <p class="mb-2">Varieties: Banganapalli, Neelum</p>
+                          <p class="mb-2"> Varieties required: Banganapalli, Neelum</p>
                           <a href="#" class="btn gradient-background btn-sm">View More</a>
                       </div>
                   </div>

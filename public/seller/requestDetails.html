@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Requests</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+
+    <script src="../scripts/leafAnim.js"></script>
+    <script>
+        // Initialize when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            MangoLeavesAnimation.init();
+        });
+    </script>
+    
+</head>
+<body class="d-flex flex-column min-vh-100"> <!-- Ensure full height of page -->
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary gradient-background">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Aamsetu</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="./postProduct.html">Post Product</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./editProduct.html">Edit Product</a>
+              </li>
+            </ul>
+
+            <!-- Search Bar -->
+            <form class="d-flex me-3" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+            <!-- Account Dropdown -->
+            <div class="dropdown">
+              <button class="btn btn-light dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Account" width="30" height="30">
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+                <li><a class="dropdown-item" href="./sellerProfile.html">Edit Profile</a></li>
+                <li><a class="dropdown-item" href="../logInSignUp.html">Log Out</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container mt-4 card card-img flex-grow-1"> <!-- Allows content to expand -->
+        <h2 class="text-center">Buyer Request Details</h2>
+
+        <!-- Buyer Info Section -->
+        <div class="info-section card p-4">
+            <h4>Buyer Information</h4>
+            <div class="info-row"><strong>Name:</strong> <span id="buyer-name">-</span></div>
+            <div class="info-row"><strong>Address:</strong> <span id="buyer-location">-</span></div>
+        </div>
+
+        <!-- Request Details Section -->
+        <div class="request-section card p-4 mt-3">
+            <h4>Mango Request Details</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Mango Variety</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody id="request-list">
+                    <!-- Data will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Call Button -->
+        <div class="text-center mt-3">
+            <button class="btn gradient-background"><i class="fas fa-phone"></i> Call</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="container-fluid footer-pad gradient-background mt-auto py-3"> <!-- Push footer to bottom -->
+        <div class="d-flex justify-content-between align-items-center">
+            <span>© 2025 Aamsetu, Inc</span>
+            <ul class="nav list-unstyled d-flex">
+                <!-- <li class="ms-3 "><a class="text-body-secondary" href="#"><i class="fab fa-twitter"></i></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fab fa-instagram"></i></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fab fa-facebook"></i></a></li> -->
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Populate Data from URL parameters
+        window.addEventListener("load", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const buyerName = urlParams.get("name");
+            const location = urlParams.get("location");
+            const varieties = urlParams.get("varieties");
+            const quantities = urlParams.get("quantities");
+
+            if (buyerName) document.getElementById("buyer-name").textContent = buyerName;
+            if (location) document.getElementById("buyer-location").textContent = location;
+
+            if (varieties && quantities) {
+                const varietyList = varieties.split(",");
+                const quantityList = quantities.split(",");
+                const requestList = document.getElementById("request-list");
+
+                requestList.innerHTML = "";
+                varietyList.forEach((variety, index) => {
+                    let quantity = quantityList[index] || "-";
+                    requestList.innerHTML += `
+                        <tr>
+                            <td>${variety.trim()}</td>
+                            <td>${quantity.trim()} kg</td>
+                        </tr>
+                    `;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

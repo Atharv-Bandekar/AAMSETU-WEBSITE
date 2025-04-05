@@ -1,0 +1,294 @@
+/* styles.css */
+
+/* Navbar Styles */
+.gradient-background {
+    background: linear-gradient(300deg, #ff8000, #ffbf00, #ffff00);
+    background-size: 180% 180%;
+    animation: gradient-bg-animation 18s ease infinite;
+}
+
+.gradient-text {
+    background: linear-gradient(300deg, #003300, #004d00, #008000);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes gradient-bg-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.bor {
+    border: 10px solid black;
+}
+
+/* Navbar */
+.navbar {
+    padding: 20px;
+    text-align: center;
+}
+
+.navbar h1 {
+    margin: 0;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/* Container */
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+/* Seller Image Section */
+.seller-image-container {
+    text-align: center;
+    margin: 20px 0 30px 0;
+}
+
+.circular-image {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.circular-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #f0f0f0;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background: white;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: transform 0.2s;
+}
+
+.edit-icon:hover {
+    transform: scale(1.1);
+}
+
+.edit-icon i {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Info Section */
+.info-section {
+    margin-bottom: 30px;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 8px 0;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #333;
+    min-width: 100px;
+}
+
+.info-value {
+    color: #666;
+    flex: 1;
+}
+
+/* Varieties Section */
+.varieties-section {
+    margin-bottom: 30px;
+}
+
+.variety-list {
+    margin-top: 10px;
+}
+
+.variety-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.variety-item:hover {
+    transform: translateX(5px);
+}
+
+.view-images-btn {
+    padding: 8px 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.view-images-btn:hover {
+    background: #45a049;
+}
+
+/* Comments Section */
+.comments-section {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    resize: vertical;
+    min-height: 100px;
+    transition: border-color 0.2s;
+}
+
+textarea:focus {
+    border-color: #ff8000;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255,128,0,0.1);
+}
+
+/* Rating Section */
+.rating-section {
+    margin-bottom: 30px;
+}
+
+.stars {
+    display: inline-block;
+}
+
+.stars .fa-star {
+    color: #ddd;
+    cursor: pointer;
+    font-size: 24px;
+    padding: 2px;
+    transition: color 0.2s;
+}
+
+.stars .fa-star.active {
+    color: #ffc107;
+}
+
+/* Call Button */
+.call-button-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.call-btn {
+    padding: 12px 40px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+
+.call-btn:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container {
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .info-label {
+        min-width: auto;
+    }
+
+    .variety-item {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .view-images-btn {
+        width: 100%;
+    }
+
+    .call-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Animation for Form Elements */
+.form-control, .form-select, .btn {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,26 @@
+.gradient-background {
+  background: linear-gradient(300deg, #ff8000, #ffbf00, #ffff00);
+  background-size: 180% 180%;
+  animation: gradient-bg-animation 18s ease infinite;
+}
+
+.gradient-text {
+  background: linear-gradient(300deg, #003300, #004d00, #008000);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes gradient-bg-animation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.bor{
+  border:10px solid black;
+}
+
+.footer-pad{
+  padding-left:0px;
+  padding-right:0px;
+}

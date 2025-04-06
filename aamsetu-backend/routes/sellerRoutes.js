@@ -1,25 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const authenticate = require('../middlewares/auth');
+const sellerProductController = require('../controllers/sellerProductController');
+const { authenticate, authorizeRoles } = require('../middlewares/auth');
 
-// Seller Profile
-router.get('/profile', authenticate, (req, res) => {
-  res.json({ message: 'Seller profile loaded', user: req.user });
-});
+// Create product
+router.post('/product', authenticate, authorizeRoles('seller'), sellerProductController.createProduct);
 
-// Request Details
-router.get('/requests', authenticate, (req, res) => {
-  res.json({ message: 'Seller request details' });
-});
+// Get all products for the seller
+router.get('/products', authenticate, authorizeRoles('seller'), sellerProductController.getMyProducts);
 
-// Post Product
-router.post('/product', authenticate, (req, res) => {
-  res.json({ message: 'Product posted successfully' });
-});
+// Update product
+router.put('/product/:id', authenticate, authorizeRoles('seller'), sellerProductController.updateProduct);
 
-// Edit Product
-router.put('/product/:id/edit', authenticate, (req, res) => {
-  res.json({ message: `Product ${req.params.id} updated successfully` });
-});
+// Delete product
+router.delete('/product/:id', authenticate, authorizeRoles('seller'), sellerProductController.deleteProduct);
 
 module.exports = router;

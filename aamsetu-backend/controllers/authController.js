@@ -8,14 +8,15 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your_fallback_secret';
 
 // Register a new user
 const register = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  console.log("📦 Incoming register request body:", req.body); // 👈 ADD THIS
+  const { name, phone, password, role } = req.body;
 
   try {
-    const existing = await User.findOne({ where: { email } });
+    const existing = await User.findOne({ where: { phone } });
     if (existing) return res.status(400).json({ message: 'User already exists' });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await User.create({ name, email, password: hashedPassword, role });
+    const newUser = await User.create({ name, phone, password: hashedPassword, role });
 
     console.log("🔐 Saved Hashed Password:", newUser.password);
 
@@ -28,12 +29,12 @@ const register = async (req, res) => {
 
 // Login
 const login = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, password } = req.body;
 
   try {
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { name} });
     if (!user) {
-      console.log("❌ User not found for email:", email);
+      console.log("❌ User not found for name:", name);
       return res.status(400).json({ message: 'User not found' });
     }
 
@@ -59,4 +60,30 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+//update profile
+const updateProfile = async (req, res) => {
+  try {
+    const userId = req.user.id; // From auth middleware
+    const { name, password, role } = req.body;
+
+    const user = await User.findByPk(userId);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    if (name) user.name = name;
+    if (role) user.role = role;
+
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
+    }
+
+    await user.save();
+    res.status(200).json({ message: 'Profile updated successfully', user });
+
+  } catch (error) {
+    console.error("Update Profile Error:", error);
+    res.status(500).json({ message: 'Server error while updating profile' });
+  }
+};
+
+module.exports = { register, login , updateProfile};

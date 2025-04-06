@@ -19,4 +19,6 @@ const getBuyerProfile = async (req, res) => {
   }
 };
 
+
+
 module.exports = { getBuyerProfile };

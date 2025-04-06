@@ -2,13 +2,25 @@
 
 const express = require('express');
 const router = express.Router();
-const buyerRequestController = require('../controllers/buyerRequestController');
-const { authenticate, authorizeRoles } = require('../middlewares/auth');
-// Create a new request
-router.post('/', authenticate, authorizeRoles('buyer'),buyerRequestController.createRequest);
 
-// You can add more routes like GET, PUT, DELETE if needed later
-// Get all requests for the logged-in buyer
-//router.get('/', buyerRequestController.getBuyerRequests);
+// Controller functions
+const buyerRequestController = require('../controllers/buyerRequestController');
+
+
+// Middleware
+const { authenticate, authorizeRoles } = require('../middlewares/auth');
+
+// Create a new request (only for buyers)
+router.post('/', authenticate, authorizeRoles('buyer'), buyerRequestController.createRequest);
+
+// Get all requests of the logged-in buyer
+router.get('/my', authenticate, authorizeRoles('buyer'), buyerRequestController.getMyRequests);
+
+//update request
+router.put('/:id', authenticate, authorizeRoles('buyer'), buyerRequestController.updateRequest);
+
+//delete request
+router.delete('/:id', authenticate, authorizeRoles('buyer'), buyerRequestController.deleteRequest);
+
 
 module.exports = router;

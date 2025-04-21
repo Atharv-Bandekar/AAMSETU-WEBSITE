@@ -1,186 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Broker Details</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../styles/styles.css">
-    <link rel="stylesheet" href="../styles/navbar.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-    <script src="../scripts/leafAnim.js"></script>
-    <script>
-        // Initialize when the page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            MangoLeavesAnimation.init();
-        });
-    </script>
-    
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #e8f5e9);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    .container {
+      max-width: 850px;
+      margin-top: 60px;
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: bold;
+      color: #2e7d32;
+    }
+
+    .product-info p,
+    .seller-info p {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .product-info i,
+    .seller-info i {
+      margin-right: 10px;
+      color: #388e3c;
+    }
+
+    .circular-image img {
+      border-radius: 50%;
+      object-fit: cover;
+      width: 150px;
+      height: 150px;
+      border: 4px solid #66bb6a;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .call-button-container {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .call-btn {
+      font-size: 18px;
+      border-radius: 30px;
+      background-color: #43a047;
+      color: white;
+      padding: 12px 30px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .call-btn:hover {
+      background-color: #2e7d32;
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .row.align-items-center {
+        flex-direction: column;
+      }
+
+      .circular-image {
+        margin-bottom: 20px;
+      }
+
+      .container {
+        padding: 25px 15px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <div class="container">
+    <h2>🌿 Product Details</h2>
 
-    <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary gradient-background">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Aamsetu</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Edit request</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Post request</a>
-          </li>
-        </ul>
-
-        <!-- Search Bar -->
-        <form class="d-flex me-3" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-
-        <!-- Account Dropdown -->
-        <div class="dropdown">
-          <button class="btn btn-light dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Account" width="30" height="30">
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-            <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-            <li><a class="dropdown-item" href="#">Log Out</a></li>
-          </ul>
-        </div>
-
+    <!-- Product Info Section -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-7 product-info">
+        <p><i class="fas fa-seedling"></i><strong>Variety Name:</strong> <span id="variety-name">-</span></p>
+        <p><i class="fas fa-warehouse"></i><strong>Availability:</strong> <span id="availability">-</span></p>
+        <p><i class="fas fa-boxes"></i><strong>Quantity:</strong> <span id="quantity">-</span></p>
+        <p><i class="fas fa-rupee-sign"></i><strong>Cost:</strong> ₹<span id="cost">-</span></p>
       </div>
     </div>
-</nav>
 
-    <div class="container mt-4">
-        <!-- Seller Image Section -->
-        <div class="seller-image-container">
-            <div class="circular-image">
-                <img src="../assets/images/placeholder.png" alt="Seller's Photo" id="seller-img">
-            </div>
-        </div>
-
-        <!-- Basic Info -->
-        <div class="info-section">
-            <div class="info-row">
-                <span class="info-label">Name:</span>
-                <span class="info-value" id="name">-</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">Address:</span>
-                <span class="info-value" id="location">-</span>
-            </div>
-        </div>
-
-        <!-- Varieties Section -->
-        <div class="varieties-section">
-            <label>Varieties:</label>
-            <div class="variety-list">
-                <div class="variety-item">
-                    <span>Variety Name 1</span>
-                    <button class="view-images-btn gradient-background text-body-secondary">View Images</button>
-                </div>
-                <div class="variety-item">
-                    <span>Variety Name 2</span>
-                    <button class="view-images-btn gradient-background text-body-secondary">View Images</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Comments Section -->
-        <div class="comments-section">
-            <label for="comments">Comments:</label>
-            <textarea id="comments" rows="3" placeholder="Enter comments"></textarea>
-        </div>
-
-        <!-- Rating Section -->
-        <div class="rating-section">
-            <label>Rating:</label>
-            <div class="stars">
-                <i class="fas fa-star" data-rating="1"></i>
-                <i class="fas fa-star" data-rating="2"></i>
-                <i class="fas fa-star" data-rating="3"></i>
-                <i class="fas fa-star" data-rating="4"></i>
-                <i class="fas fa-star" data-rating="5"></i>
-            </div>
-        </div>
-
-        <!-- Call Button -->
-        <div class="call-button-container">
-            <button class="call-btn gradient-background text-body-secondary">
-                <i class="fas fa-phone"></i> Call
-            </button>
-        </div>
+    <!-- Seller Info Section -->
+    <div class="row justify-content-center align-items-center mb-4">
+      <div class="col-md-3 circular-image">
+        <img src="../assets/images/placeholder.png" alt="Seller's Photo" id="seller-img" class="img-fluid" />
+      </div>
+      <div class="col-md-5 seller-info">
+        <p><i class="fas fa-user"></i><strong>Name:</strong> <span id="name">-</span></p>
+        <p><i class="fas fa-map-marker-alt"></i><strong>Address:</strong> <span id="location">-</span></p>
+      </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Star rating functionality
-        document.querySelectorAll('.stars .fa-star').forEach(star => {
-            star.addEventListener('click', function() {
-                const rating = this.dataset.rating;
-                document.querySelectorAll('.stars .fa-star').forEach(s => {
-                    s.classList.toggle('active', s.dataset.rating <= rating);
-                });
-            });
-        });
+    <!-- Call Button -->
+    <div class="call-button-container">
+      <button class="call-btn btn">
+        <i class="fas fa-phone-alt"></i> Call Seller
+      </button>
+    </div>
+  </div>
 
-        // Populate data from URL parameters
-        window.addEventListener('load', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const sellerName = urlParams.get('name');
-            const location = urlParams.get('location');
-            const varieties = urlParams.get('varieties');
+  <!-- Populate data via JS -->
+  <script>
+    window.addEventListener('load', function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sellerName = urlParams.get('name');
+      const location = urlParams.get('location');
+      const variety = urlParams.get('variety');
+      const availability = urlParams.get('availability');
+      const quantity = urlParams.get('quantity');
+      const cost = urlParams.get('cost');
 
-            if (sellerName) document.getElementById('name').textContent = sellerName;
-            if (location) document.getElementById('location').textContent = location;
-            if (varieties) {
-                const varietyList = varieties.split(',');
-                const varietyContainer = document.querySelector('.variety-list');
-                varietyContainer.innerHTML = '';
-                varietyList.forEach(variety => {
-                    varietyContainer.innerHTML += `
-                        <div class="variety-item">
-                            <span>${variety.trim()}</span>
-                            <button class="view-images-btn">View Images</button>
-                        </div>
-                    `;
-                });
-            }
-        });
-    </script>
-
-        <!--footer-->
-        <div class="container-fluid footer-pad gradient-background">
-            <footer class="justify-content-between align-items-center py-3 mt-4">
-              <div class="col-md-4 d-flex align-items-center">
-                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-                  <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-                </a>
-                <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Aamsetu, Inc</span>
-              </div>
-          
-              <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-              </ul>
-            </footer>
-          </div>
-    
-    
+      if (sellerName) document.getElementById('name').textContent = sellerName;
+      if (location) document.getElementById('location').textContent = location;
+      if (variety) document.getElementById('variety-name').textContent = variety;
+      if (availability) document.getElementById('availability').textContent = availability;
+      if (quantity) document.getElementById('quantity').textContent = quantity;
+      if (cost) document.getElementById('cost').textContent = cost;
+    });
+  </script>
 </body>
+
 </html>

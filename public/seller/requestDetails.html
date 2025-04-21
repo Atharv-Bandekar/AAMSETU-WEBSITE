@@ -18,6 +18,86 @@
         document.addEventListener('DOMContentLoaded', function() {
             MangoLeavesAnimation.init();
         });
+        async function loadPendingRequest() {
+    const token = sessionStorage.getItem("token") || localStorage.getItem("token") || document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
+
+    if (!token) {
+        alert("Unauthorized. Please log in.");
+        return;
+    }
+
+    try {
+        const res = await fetch("http://localhost:5000/api/requests/available", {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const { requests } = await res.json();
+
+        if (!requests.length) {
+            document.querySelector(".container").innerHTML = `<h4 class='text-center'>No pending requests</h4>`;
+            return;
+        }
+
+        const req = requests[0];  // Show first request (you can make it a loop if needed)
+
+        document.getElementById("buyer-name").textContent = req.name;
+        document.getElementById("buyer-location").textContent = req.address + ", " + req.state;
+
+        const requestList = document.getElementById("request-list");
+        requestList.innerHTML = req.varieties.map(v => `
+            <tr>
+                <td>${v.variety}</td>
+                <td>${v.quantity} ${v.unit}</td>
+            </tr>
+        `).join("");
+
+        // Add accept/reject buttons
+        const btnRow = document.createElement("div");
+        btnRow.classList.add("text-center", "mt-3");
+
+        btnRow.innerHTML = `
+            <button class="btn btn-success me-2" onclick="updateStatus(${req.id}, 'approved')">Accept</button>
+            <button class="btn btn-danger" onclick="updateStatus(${req.id}, 'rejected')">Reject</button>
+        `;
+
+        document.querySelector(".request-section").appendChild(btnRow);
+
+    } catch (err) {
+        console.error("Failed to load request", err);
+    }
+}
+
+async function updateStatus(requestId, status) {
+    const token = sessionStorage.getItem("token") || localStorage.getItem("token") || document.cookie.split('; ').find(row => row.startsWith('token='))?.split('=')[1];
+
+    try {
+        const res = await fetch(`http://localhost:5000/api/requests/${requestId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ status })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+            alert("Status updated to " + status);
+            location.reload();
+        } else {
+            alert("Error: " + (data.message || "Failed"));
+        }
+
+    } catch (err) {
+        console.error("Update error:", err);
+        alert("Request update failed.");
+    }
+}
+
+window.addEventListener("DOMContentLoaded", loadPendingRequest);
+
     </script>
     
 </head>

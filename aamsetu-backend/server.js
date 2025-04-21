@@ -17,7 +17,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/buyer', buyerRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/seller', sellerRoutes)
-app.use('/api/products', productRoutes);
+app.use('/api/product', productRoutes);
 
 // Sync all models properly
 db.sequelize.sync({ alter: true }).then(() => {

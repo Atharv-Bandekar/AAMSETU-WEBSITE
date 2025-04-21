@@ -4,26 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details</title>
-
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/navbar.css">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <style>
-        /* Make the page take full height and push footer to bottom */
         html, body {
             height: 100%;
             display: flex;
             flex-direction: column;
         }
-
-        .content {
-            flex: 1;
-        }
-
-        /* Upload Button */
+        .content { flex: 1; }
         .upload-btn {
             display: inline-block;
             padding: 6px 12px;
@@ -31,26 +21,16 @@
             color: white;
             border-radius: 5px;
             cursor: pointer;
-            text-align: center;
             font-size: 14px;
         }
-
-        .upload-btn i {
-            margin-right: 5px;
-        }
-
-        .upload-btn input {
-            display: none;
-        }
-
-        /* Image Preview */
+        .upload-btn i { margin-right: 5px; }
+        .upload-btn input { display: none; }
         .uploaded-images-preview {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-top: 5px;
         }
-
         .uploaded-images-preview img {
             width: 80px;
             height: 80px;
@@ -59,183 +39,187 @@
             border: 1px solid #ddd;
         }
     </style>
-
-<script src="../scripts/leafAnim.js"></script>
-<script>
-    // Initialize when the page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        MangoLeavesAnimation.init();
-    });
-</script>
+    <script src="../scripts/leafAnim.js"></script>
 </head>
 <body>
-
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary gradient-background">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Aamsetu</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " href="./postProduct.html">Post Product</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./editProduct.html">Edit Product</a>
-                    </li>
+<nav class="navbar navbar-expand-lg bg-body-tertiary gradient-background">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Aamsetu</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="./postProduct.html">Post Product</a></li>
+                <li class="nav-item"><a class="nav-link" href="./editProduct.html">Edit Product</a></li>
+            </ul>
+            <form class="d-flex me-3" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <div class="dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Account" width="30" height="30">
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="./sellerProfile.html">Edit Profile</a></li>
+                    <li><a class="dropdown-item" href="../logInSignUp.html">Log Out</a></li>
                 </ul>
-
-                <!-- Search Bar -->
-                <form class="d-flex me-3" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-
-                <!-- Account Dropdown -->
-                <div class="dropdown">
-                    <button class="btn btn-light dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Account" width="30" height="30">
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-                        <li><a class="dropdown-item" href="./sellerProfile.html">Edit Profile</a></li>
-                        <li><a class="dropdown-item" href="../logInSignUp.html">Log Out</a></li>
-                    </ul>
-                </div>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
+<div class="container mt-5 content">
+    <h2 class="text-center">Edit Product</h2>
 
-    <div class="container mt-5 content">
-        <h2 class="text-center">Product Details</h2>
-
-        <div class="card p-4">
-            <form id="requestForm">
-                <div id="varietyContainer">
-                    <!-- Default Variety Row (First row, cannot be removed) -->
-                    <div class="mb-3 row variety-row">
-                        <div class="col-md-3">
-                            <label class="form-label">Mango Variety:</label>
-                            <select class="form-select">
-                                <option>Alphonso</option>
-                                <option>Dasheri</option>
-                                <option>Kesar</option>
-                                <option>Langra</option>
-                                <option>Badami</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <label class="form-label">Quantity:</label>
-                            <input type="number" class="form-control" min="1" placeholder="Enter quantity">
-                        </div>
-                        <div class="col-md-2">
-                            <label class="form-label">Unit:</label>
-                            <select class="form-select">
-                                <option>kg</option>
-                                <option>dozen</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2 d-flex align-items-end">
-                            <label class="upload-btn">
-                                <i class="fas fa-upload"></i> Upload
-                                <input type="file" class="variety-image" accept="image/*" multiple>
-                            </label>
-                        </div>
-                        <div class="col-md-2 d-flex align-items-end">
-                            <button type="button" class="btn gradient-background add-row">+</button>
-                        </div>
-                        <div class="col-12 uploaded-images-preview mt-2"></div>
-                    </div>
-                </div>
-
-                <!-- Personal Details -->
-                <div class="mb-3">
-                    <label class="form-label">Name:</label>
-                    <input type="text" class="form-control" placeholder="Enter your name">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Address:</label>
-                    <input type="text" class="form-control" placeholder="Enter address">
-                </div>
-
-
-                <!-- Comments -->
-                <div class="mb-3">
-                    <label class="form-label">Comments:</label>
-                    <textarea class="form-control" rows="3" placeholder="Enter additional comments"></textarea>
-                </div>
-
-                <div class="text-center">
-                    <button type="submit" class="btn gradient-background">Edit Product</button>
-                </div>
-            </form>
-        </div>
+    <!-- Product Selector -->
+    <div class="mb-3">
+        <label>Select a product:</label>
+        <select class="form-select" id="productSelect">
+            <option disabled selected>Choose a product to edit</option>
+        </select>
     </div>
 
-    <!-- Footer -->
-    <footer class="py-3 px-2 bg-light mt-auto gradient-background">
-        <p>&copy; 2025 Aamsetu</p>
-    </footer>
+    <div class="card p-4">
+        <form id="productForm">
+            <div id="varietyContainer"></div>
+            <div class="mb-3">
+                <label class="form-label">Name:</label>
+                <input type="text" class="form-control" name="name">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Address:</label>
+                <input type="text" class="form-control" name="address">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Comments:</label>
+                <textarea class="form-control" name="comments" rows="3"></textarea>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn gradient-background">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ... footer ... -->
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const varietyContainer = document.getElementById("varietyContainer");
+<script>
+const token = sessionStorage.getItem("token") || localStorage.getItem("token");
+let selectedProductId = null;
 
-            function addVarietyRow() {
-                const newRow = document.createElement("div");
-                newRow.classList.add("mb-3", "row", "variety-row");
+document.addEventListener("DOMContentLoaded", () => {
+    const productForm = document.getElementById("productForm");
+    const productSelect = document.getElementById("productSelect");
+    const varietyContainer = document.getElementById("varietyContainer");
 
-                newRow.innerHTML = `
-                    <div class="col-md-3">
-                        <select class="form-select">
-                            <option>Alphonso</option>
-                            <option>Dasheri</option>
-                            <option>Kesar</option>
-                            <option>Langra</option>
-                            <option>Badami</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                        <input type="number" class="form-control" min="1" placeholder="Enter quantity">
-                    </div>
-                    <div class="col-md-2">
-                        <select class="form-select">
-                            <option>kg</option>
-                            <option>dozen</option>
-                        </select>
-                    </div>
-                    <div class="col-md-2 d-flex align-items-end">
-                        <label class="upload-btn">
-                            <i class="fas fa-upload"></i> Upload
-                            <input type="file" class="variety-image" accept="image/*" multiple>
-                        </label>
-                    </div>
-                    <div class="col-md-2 d-flex align-items-end">
-                        <button type="button" class="btn btn-danger remove-row">-</button>
-                    </div>
-                    <div class="col-12 uploaded-images-preview mt-2"></div>
-                `;
+    // Fetch all products for seller
+    fetch("http://localhost:5000/api/product", {
+        headers: { Authorization: `Bearer ${token}` }
+    })
+    .then(res => res.json())
+    .then(products => {
+        if (!products.length) {
+            productSelect.innerHTML = '<option disabled>No products found</option>';
+            return;
+        }
 
-                varietyContainer.appendChild(newRow);
-            }
-
-            varietyContainer.addEventListener("click", function(event) {
-                if (event.target.classList.contains("add-row")) {
-                    addVarietyRow();
-                } else if (event.target.classList.contains("remove-row")) {
-                    event.target.closest(".variety-row").remove();
-                }
-            });
+        // Populate dropdown
+        products.forEach(p => {
+            const opt = document.createElement("option");
+            opt.value = p.id;
+            opt.textContent = p.name;
+            productSelect.appendChild(opt);
         });
-    </script>
 
+        // Load first product by default
+        productSelect.addEventListener("change", () => {
+            const selected = products.find(p => p.id == productSelect.value);
+            if (selected) loadProductForEdit(selected);
+        });
+    });
+
+    function loadProductForEdit(product) {
+        selectedProductId = product.id;
+        productForm.name.value = product.name;
+        productForm.address.value = product.address || '';
+        productForm.comments.value = product.description || '';
+        varietyContainer.innerHTML = ''; // Clear existing
+
+        // Fake 'varieties' field using JSON in description (for this example)
+        const dummyVarieties = [
+            { variety: "Alphonso", quantity: 40, unit: "kg" },
+            { variety: "Kesar", quantity: 25, unit: "dozen" }
+        ]; // replace this with parsed data if you store JSON
+
+        dummyVarieties.forEach(v => {
+            const row = document.createElement("div");
+            row.classList.add("mb-3", "row", "variety-row");
+            row.innerHTML = `
+                <div class="col-md-3">
+                    <select class="form-select variety">
+                        <option ${v.variety === 'Alphonso' ? 'selected' : ''}>Alphonso</option>
+                        <option ${v.variety === 'Dasheri' ? 'selected' : ''}>Dasheri</option>
+                        <option ${v.variety === 'Kesar' ? 'selected' : ''}>Kesar</option>
+                        <option ${v.variety === 'Langra' ? 'selected' : ''}>Langra</option>
+                        <option ${v.variety === 'Badami' ? 'selected' : ''}>Badami</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input type="number" class="form-control quantity" value="${v.quantity}" min="1">
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select unit">
+                        <option ${v.unit === 'kg' ? 'selected' : ''}>kg</option>
+                        <option ${v.unit === 'dozen' ? 'selected' : ''}>dozen</option>
+                    </select>
+                </div>
+            `;
+            varietyContainer.appendChild(row);
+        });
+    }
+
+    productForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (!selectedProductId) {
+            alert("Select a product first.");
+            return;
+        }
+
+        const varieties = [...document.querySelectorAll(".variety-row")].map(row => ({
+            variety: row.querySelector(".variety").value,
+            quantity: parseFloat(row.querySelector(".quantity").value),
+            unit: row.querySelector(".unit").value
+        }));
+
+        const payload = {
+            name: productForm.name.value,
+            description: productForm.comments.value,
+            price: 100, // 💡 use a price input later
+            availability: true
+        };
+
+        try {
+            const res = await fetch(`http://localhost:5000/api/product/${selectedProductId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message);
+            alert("✅ Product updated!");
+        } catch (err) {
+            console.error("Update failed:", err);
+            alert("❌ Failed to update product.");
+        }
+    });
+});
+</script>
 </body>
 </html>

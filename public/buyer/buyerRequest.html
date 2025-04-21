@@ -11,11 +11,100 @@
 
     <script src="../scripts/leafAnim.js"></script>
     <script>
-        // Initialize when the page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            MangoLeavesAnimation.init();
+        function getCookie(name) {
+          const value = `; ${document.cookie}`;
+          const parts = value.split(`; ${name}=`);
+          if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        function addVarietyRow() {
+          const varietyContainer = document.getElementById("varietyContainer");
+          const newRow = document.createElement("div");
+          newRow.classList.add("mb-3", "row", "variety-row");
+          newRow.innerHTML = `
+            <div class="col-md-4">
+              <select class="form-select variety">
+                <option>Alphonso</option>
+                <option>Dasheri</option>
+                <option>Kesar</option>
+                <option>Langra</option>
+                <option>Badami</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <input type="number" class="form-control quantity" min="1" placeholder="Enter quantity">
+            </div>
+            <div class="col-md-3">
+              <select class="form-select unit">
+                <option>kg</option>
+                <option>dozen</option>
+              </select>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+              <button type="button" class="btn btn-danger remove-row">-</button>
+            </div>`;
+          newRow.querySelector(".remove-row").addEventListener("click", () => newRow.remove());
+          varietyContainer.appendChild(newRow);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          const requestForm = document.getElementById("requestForm");
+          const varietyContainer = document.getElementById("varietyContainer");
+
+          document.querySelector(".add-row").addEventListener("click", addVarietyRow);
+
+          requestForm.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const token = sessionStorage.getItem("token") || localStorage.getItem("token") || getCookie("token");
+            if (!token) {
+              alert("Please log in first.");
+              window.location.href = "../logInSignUp.html";
+              return;
+            }
+
+            const name = requestForm.querySelector('[name="name"]').value;
+            const address = requestForm.querySelector('[name="address"]').value;
+            const state = requestForm.querySelector('[name="state"]').value;
+            const comments = requestForm.querySelector('[name="comments"]').value;
+
+            const varieties = Array.from(document.querySelectorAll(".variety-row")).map(row => ({
+              variety: row.querySelector(".variety").value,
+              quantity: parseFloat(row.querySelector(".quantity").value),
+              unit: row.querySelector(".unit").value
+            }));
+
+            const payload = { name, address, state, comments, varieties };
+
+            try {
+              const response = await fetch("http://localhost:5000/api/requests", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(payload)
+              });
+
+              const data = await response.json();
+              if (!response.ok) {
+                console.error("Server error:", data);
+                alert("Error: " + (data.message || "Unknown error"));
+              } else {
+                alert("Request submitted successfully!");
+                requestForm.reset();
+                document.querySelectorAll(".variety-row").forEach(row => row.remove());
+                addVarietyRow();
+              }
+            } catch (err) {
+              console.error("Request error:", err);
+              alert("Failed to submit request. Please try again.");
+            }
+          });
         });
-    </script>
+      </script>
+      
+    
 </head>
 <body>
 
@@ -57,7 +146,7 @@
                     <div class="mb-3 row variety-row">
                         <div class="col-md-4">
                             <label class="form-label">Mango Variety:</label>
-                            <select class="form-select">
+                            <select class="form-select variety ">
                                 <option>Alphonso</option>
                                 <option>Dasheri</option>
                                 <option>Kesar</option>
@@ -67,11 +156,11 @@
                         </div>
                         <div class="col-md-3">
                             <label class="form-label">Quantity:</label>
-                            <input type="number" class="form-control" min="1" placeholder="Enter quantity">
+                            <input type="number" class="form-control quantity" min="1" placeholder="Enter quantity">
                         </div>
                         <div class="col-md-3">
                             <label class="form-label">Unit:</label>
-                            <select class="form-select">
+                            <select class="form-select unit ">
                                 <option>kg</option>
                                 <option>dozen</option>
                             </select>
@@ -85,13 +174,13 @@
                 <!-- Personal Details -->
                 <div class="mb-3">
                     <label class="form-label">Name:</label>
-                    <input type="text" class="form-control" placeholder="Enter your name">
+                    <input type="text" class="form-control" name="name" placeholder="Enter your name">
                 </div>
                 
                 <div class="mb-3 row">
                     <div class="col-md-6">
                         <label class="form-label">State:</label>
-                        <select class="form-select" id="stateSelect">
+                        <select class="form-select" id="stateSelect" name="state">
                             <option value="">Select State</option>
                             <option value="Andhra Pradesh">Andhra Pradesh</option>
                             <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -123,23 +212,17 @@
                             <option value="West Bengal">West Bengal</option>
                         </select>
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label">District:</label>
-                        <select class="form-select" id="districtSelect">
-                            <option value="">Select District</option>
-                        </select>
-                    </div>
                 </div>
                 
                 <div class="mb-3">
                     <label class="form-label">Address:</label>
-                    <input type="text" class="form-control" placeholder="Enter address">
+                    <input type="text" class="form-control" name="address" placeholder="Enter address">
                 </div>
 
                 <!-- Comments -->
                 <div class="mb-3">
                     <label class="form-label">Comments:</label>
-                    <textarea class="form-control" rows="3" placeholder="Enter additional comments"></textarea>
+                    <textarea class="form-control" name="comments" rows="3" placeholder="Enter additional comments"></textarea>
                 </div>
 
                 <!-- Submit Button -->

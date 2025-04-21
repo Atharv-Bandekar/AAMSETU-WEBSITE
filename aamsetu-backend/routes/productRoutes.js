@@ -4,7 +4,7 @@ const productController = require('../controllers/sellerProductController');
 const { authenticate, authorizeRoles } = require('../middlewares/auth');
 
 router.post(
-  '/create',
+  '/',
   authenticate,
   authorizeRoles('seller'),
   productController.createProduct
@@ -14,7 +14,7 @@ router.get(
   '/my-products',
   authenticate,
   authorizeRoles('seller'),
-  productController.getSellerProducts
+  productController.getMyProducts
 );
 
 router.put(

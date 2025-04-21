@@ -7,23 +7,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../styles/navbar.css"> <!-- External CSS -->
     <style>
-
-        /* Make the whole page use Flexbox */
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
-
-        /* Center Content Vertically */
         .main-container {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
-        /* Centered Seller Info Tile */
         .seller-info-container {
             width: 400px;
             padding: 20px;
@@ -32,16 +26,12 @@
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
-
-        /* Profile Image */
         .profile-icon {
             width: 100px;
             height: 100px;
             border-radius: 50%;
             margin-bottom: 15px;
         }
-
-        /* Gradient Buttons */
         .btn-gradient {
             background: linear-gradient(to right, #ff8000, #ffbf00, #ffff00);
             border: none;
@@ -50,7 +40,6 @@
             width: 100%;
             transition: 0.3s;
         }
-
         .btn-gradient:hover {
             opacity: 0.8;
         }
@@ -58,25 +47,64 @@
 
 <script src="../scripts/leafAnim.js"></script>
 <script>
-    // Initialize when the page loads
-    document.addEventListener('DOMContentLoaded', function() {
-        MangoLeavesAnimation.init();
-    });
+  function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  async function loadBuyerRequests() {
+      const token = sessionStorage.getItem("token") || localStorage.getItem("token") || getCookie("token");
+      const container = document.getElementById("buyer-requests");
+
+      try {
+          const res = await fetch("http://localhost:5000/api/requests/my", {
+              headers: { Authorization: `Bearer ${token}` },
+          });
+
+          const { requests } = await res.json();
+
+          if (!requests.length) {
+              container.innerHTML = "<p class='text-muted'>No previous requests yet.</p>";
+              return;
+          }
+
+          const html = requests.map((req, idx) => `
+            <div class="card mb-3">
+              <div class="card-body">
+                <h5 class="card-title">Request #${idx + 1} <span class="badge bg-info">${req.status}</span></h5>
+                <p><strong>State:</strong> ${req.state}</p>
+                <p><strong>Address:</strong> ${req.address}</p>
+                <p><strong>Comments:</strong> ${req.comments || 'N/A'}</p>
+                <ul><strong>Varieties:</strong>
+                  ${req.varieties.map(v => `<li>${v.variety} – ${v.quantity} ${v.unit}</li>`).join("")}
+                </ul>
+              </div>
+            </div>
+          `).join("");
+
+          container.innerHTML = html;
+
+      } catch (err) {
+          console.error("Error loading buyer requests:", err);
+          container.innerHTML = "<p class='text-danger'>Failed to load requests.</p>";
+      }
+  }
+
+  document.addEventListener("DOMContentLoaded", loadBuyerRequests);
 </script>
 </head>
 <body>
-
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary gradient-background">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Aamsetu</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" href="#">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="./buyerRequest.html">Post request</a>
@@ -85,29 +113,23 @@
               <a class="nav-link" href="./editRequest.html">Edit request</a>
             </li>
           </ul>
-
-          <!-- Search Bar -->
           <form class="d-flex me-3" role="search">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
-
-          <!-- Account Dropdown -->
           <div class="dropdown">
-            <button class="btn btn-light dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-light dropdown-toggle" type="button" id="accountDropdown" data-bs-toggle="dropdown">
               <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Account" width="30" height="30">
             </button>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+            <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="./buyerProfile.html">Edit Profile</a></li>
               <li><a class="dropdown-item" href="../logInSignUp.html">Log Out</a></li>
             </ul>
           </div>
-
         </div>
       </div>
-  </nav>
+    </nav>
 
-    <!-- Main Container (Vertically Centered) -->
     <div class="main-container">
         <div class="seller-info-container">
             <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Seller Profile" class="profile-icon">
@@ -126,30 +148,28 @@
                     <input type="text" class="form-control" placeholder="Username" required>
                 </div>
             </form>
-            
-            <!-- Gradient Buttons -->
             <button class="btn-gradient mt-3">Edit Profile</button>
             <button class="btn-gradient mt-2">Log Out</button>
         </div>
     </div>
 
-    <!--footer-->
+    <!-- Injected Buyer Requests -->
+    <div class="container mt-4">
+      <div id="buyer-requests"></div>
+    </div>
+
     <div class="container-fluid footer-pad gradient-background">
         <footer class="justify-content-between align-items-center py-3 mt-4">
           <div class="col-md-4 d-flex align-items-center">
-            <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-              <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-            </a>
             <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Aamsetu, Inc</span>
           </div>
-      
           <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-            <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-            <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fab fa-twitter"></i></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fab fa-instagram"></i></a></li>
+            <li class="ms-3"><a class="text-body-secondary" href="#"><i class="fab fa-facebook"></i></a></li>
           </ul>
         </footer>
-      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 </body>
